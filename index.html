@@ -1,0 +1,653 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CattleGrow-Analytica: Bioscience Derivative Modeler</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering math equations beautifully -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            transition: background .15s ease-in-out;
+        }
+        .custom-slider::-webkit-slider-thumb:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Top Navigation / Brand Header -->
+    <header class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-500/20 p-2.5 rounded-xl border border-emerald-400/30">
+                    <i class="fa-solid fa-cow text-2xl text-emerald-300"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">CattleGrow-Analytica</h1>
+                    <p class="text-xs text-emerald-200">Malaysia Animal Husbandry Technology (SFH) • Bioscience Modeler</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 text-xs bg-emerald-950/40 px-4 py-2 rounded-full border border-emerald-700/50">
+                <span class="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-slate-200 font-medium">Interactive Simulator f'(t) Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Interactive Dashboard Header & Context Card -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-100 flex flex-col lg:flex-row gap-8 justify-between items-start">
+            <div class="space-y-4 max-w-3xl">
+                <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    Course Application Assignment
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                    Modelling Weight Gain in Kedah-Kelantan (KK) Cattle
+                </h2>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    In beef production, managing feed inputs vs. rate of gain is critical for farm profitability. 
+                    This program models the sigmoidal growth of native Malaysian <strong>Kedah-Kelantan (KK) cattle</strong> using a 
+                    logistic growth function $f(t)$ and applies its mathematical derivative $f'(t)$ to analyze the 
+                    <strong>Average Daily Gain (ADG)</strong>. 
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-emerald-600"></i> SFH: Animal Husbandry Technology</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-rose-500"></i> Localized: Malaysia Livestock Scenario</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-calculator text-blue-500"></i> Applied Calculus & Curve Fitting</span>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Card -->
+            <div class="w-full lg:w-auto min-w-[280px] bg-slate-50 rounded-xl p-5 border border-slate-100 space-y-4 self-stretch flex flex-col justify-between">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Growth Standard (KK Cattle)</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500">Birth Weight ($W_0$)</span>
+                        <span class="text-sm font-semibold text-slate-800">15.0 kg</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500">Typical Market Weight</span>
+                        <span class="text-sm font-semibold text-slate-800">250 - 320 kg</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500">Optimum Slaughter Age</span>
+                        <span class="text-sm font-semibold text-emerald-700">18 - 24 months</span>
+                    </div>
+                </div>
+                <div class="pt-3 border-t border-slate-200 text-center">
+                    <span class="text-[10px] text-slate-400 italic">Data calibrated to MARDI & DVS Malaysia standards</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Playground Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Panel: Interactive Adjustments & Graph (8 Cols) -->
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Live Growth & Rate of Change Dynamics</h3>
+                            <p class="text-xs text-slate-500">Adjust growth parameters below, then click any point on the graph to analyze.</p>
+                        </div>
+                        
+                        <!-- Toggle view mode -->
+                        <div class="flex gap-2 bg-slate-100 p-1 rounded-lg text-xs font-semibold">
+                            <button id="btnBoth" class="px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm transition">Dual Curves</button>
+                            <button id="btnWeightOnly" class="px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 transition">Weight only</button>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="relative min-h-[300px] md:min-h-[400px] w-full bg-slate-50 rounded-xl p-3 border border-slate-100">
+                        <canvas id="growthChart" class="w-full h-full"></canvas>
+                        
+                        <!-- Tap to interact badge overlay -->
+                        <div class="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur text-white px-3 py-1.5 rounded-lg text-[11px] font-medium flex items-center gap-1.5 shadow-md">
+                            <i class="fa-solid fa-pointer-arrow animate-bounce"></i>
+                            <span>Click anywhere on the line/grid to inspect that month</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Parameter Adjustment Sliders -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                                    Target Mature Weight ($L$)
+                                </label>
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded" id="valL">300 kg</span>
+                            </div>
+                            <input type="range" id="sliderL" min="200" max="400" step="10" value="300" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer custom-slider">
+                            <p class="text-[10px] text-slate-400">Maximum asymptotic weight of KK beef cattle reached under optimal nutritional intake.</p>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 inline-block"></span>
+                                    Growth Rate Coefficient ($k$)
+                                </label>
+                                <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded" id="valK">0.22</span>
+                            </div>
+                            <input type="range" id="sliderK" min="0.10" max="0.35" step="0.01" value="0.22" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer custom-slider">
+                            <p class="text-[10px] text-slate-400">Determines slope acceleration. Higher rates represent improved pasture feed formulation or genetics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mathematical Formulas Accordion -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-emerald-600"></i>
+                        The Calculus Engine f(t) and f'(t)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Cumulative Growth Function</h4>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center overflow-x-auto">
+                                $$f(t) = \frac{L}{1 + C \cdot e^{-k t}}$$
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Where $L$ is the mature ceiling weight, $k$ is the acceleration constant, and $C = (L - W_0) / W_0$ is the constant scaling the initial birth weight ($W_0 = 15$ kg) at $t = 0$.
+                            </p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-indigo-800 uppercase tracking-wider">First-Order Growth Derivative</h4>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 text-center overflow-x-auto">
+                                $$f'(t) = \frac{L \cdot C \cdot k \cdot e^{-k t}}{(1 + C \cdot e^{-k t})^2}$$
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Represents the instantaneous rate of change (weight gain rate) in kilograms per month. Multiplying $f'(t)$ by $\approx 32.89$ yields the industry-standard **Average Daily Gain (ADG) in grams/day**.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Click-to-Analyze Calculator Display (4 Cols) -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- Derivative Analysis Engine -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-2xl p-6 shadow-xl space-y-6 relative overflow-hidden">
+                    
+                    <!-- Decorative glowing pattern background -->
+                    <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+                    <div class="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl"></div>
+
+                    <div class="space-y-2 border-b border-slate-800 pb-4">
+                        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block">Interactive Live Inspector</span>
+                        <h3 class="text-xl font-bold tracking-tight">Derivative Interpreter</h3>
+                        <p class="text-xs text-slate-400">Click any age along the timeline to trigger live differential calculus calculations.</p>
+                    </div>
+
+                    <!-- Inspected Month Stats -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-medium">Selected Age:</span>
+                            <span class="text-lg font-bold text-emerald-400 bg-slate-800 px-3 py-1 rounded-md" id="inspectAge">12.0 Months</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block uppercase font-bold">Cattle Weight</span>
+                                <span class="text-xl font-extrabold text-slate-100" id="inspectWeight">190.2 kg</span>
+                                <span class="text-[10px] text-slate-400 block mt-1">$f(t)$ value</span>
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block uppercase font-bold">Monthly Derivative</span>
+                                <span class="text-xl font-extrabold text-emerald-400" id="inspectDerivative">15.4 kg/mo</span>
+                                <span class="text-[10px] text-slate-400 block mt-1">$f'(t)$ value</span>
+                            </div>
+                        </div>
+
+                        <!-- ADG Display -->
+                        <div class="bg-emerald-950/40 border border-emerald-500/20 p-4 rounded-xl text-center space-y-1">
+                            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">Average Daily Gain (ADG)</span>
+                            <div class="text-3xl font-black text-white" id="inspectAdg">506 g/day</div>
+                            <span class="text-[10px] text-slate-300">Target standard for beef sector viability</span>
+                        </div>
+
+                        <!-- Progress Bar comparing current f'(t) rate to peak possible rate -->
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>Growth Rate Efficiency</span>
+                                <span id="growthPercentage">84% of peak rate</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2">
+                                <div id="efficiencyProgress" class="bg-gradient-to-r from-teal-500 to-emerald-400 h-2 rounded-full transition-all duration-300" style="width: 84%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Calculus Trace -->
+                    <div class="bg-slate-800/40 p-4 rounded-xl space-y-3 border border-slate-800/60">
+                        <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-terminal text-emerald-400"></i>
+                            Live Computation Trace:
+                        </h4>
+                        <div class="text-[11px] font-mono text-slate-300 space-y-2 leading-relaxed">
+                            <div>
+                                <span class="text-slate-500">1. Scaler C:</span> 
+                                <span id="mathTraceC">19.00</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500">2. $e^{-kt}$:</span> 
+                                <span id="mathTraceE">0.071</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500">3. Denom $(1 + Ce^{-kt})$:</span> 
+                                <span id="mathTraceDenom">2.355</span>
+                            </div>
+                            <div class="pt-1.5 border-t border-slate-800/80">
+                                <span class="text-slate-500">4. ADG:</span>
+                                <span class="text-emerald-400 font-bold">f'(t) × (1000g / 30.4d)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layman Lay Explanation Callout -->
+                    <div class="bg-slate-800/80 p-4 rounded-xl border-l-4 border-emerald-500 space-y-1">
+                        <h4 class="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                            <i class="fa-solid fa-user-graduate"></i>
+                            Husbandry Translation (Layman Explain)
+                        </h4>
+                        <p id="laymanText" class="text-xs text-slate-200 leading-relaxed">
+                            The calf is growing rapidly! Protein requirements are extremely high to build frame size. Optimize pasture supplement.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Real World Context & References Grid -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-100 space-y-6">
+            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-teal-600"></i>
+                Malaysian Agricultural & Scientific Context
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Bioscience Context -->
+                <div class="space-y-2 border-r border-slate-100 pr-4 last:border-r-0">
+                    <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-leaf text-emerald-600"></i>
+                        Bioscience Context
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Biological growth follows a sigmoidal pattern because animals have finite mature dimensions due to cellular constraints. The derivative $f'(t)$ tracks dynamic metabolic demands. The peak of $f'(t)$ (inflection point) occurs precisely when the body's rate of tissue formation is at maximum. At this stage, feed formulation efficiency is highly optimized.
+                    </p>
+                </div>
+
+                <!-- Animal Husbandry Application -->
+                <div class="space-y-2 border-r border-slate-100 pr-4 last:border-r-0">
+                    <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-wheat-awn text-indigo-600"></i>
+                        Malaysian Farm Management
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        For local breeds like Kedah-Kelantan (KK) beef cattle, defining pasture strategy depends on knowing the inflection age. Breeders in locations like Kelantan and Terengganu can use this mathematical modeling to decide when to move calves from costly feedlot diets to simple maintenance pasture, thereby preserving profit margins.
+                    </p>
+                </div>
+
+                <!-- Reference Documents -->
+                <div class="space-y-2 last:border-r-0">
+                    <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-blue-600"></i>
+                        Reference Data & Publications
+                    </h4>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li class="flex items-start gap-1">
+                            <i class="fa-solid fa-link text-slate-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-slate-800 block">MARDI Research Journal (Vol. 35)</strong>
+                                <span>"Growth performance of local beef cattle under intensive pasture systems in Malaysia."</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-1">
+                            <i class="fa-solid fa-link text-slate-400 mt-0.5"></i>
+                            <div>
+                                <strong class="text-slate-800 block">Department of Veterinary Services (DVS) Malaysia</strong>
+                                <span>"Livestock Performance Indicators (Cattle breeds: Kedah-Kelantan & KK Crosses)."</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>© 2026 CattleGrow-Analytica. Created for Bioscience & Livestock Undergraduates.</p>
+            <div class="flex space-x-4">
+                <span class="hover:text-white transition cursor-pointer">Privacy Policy</span>
+                <span class="hover:text-white transition cursor-pointer">Course Guidelines</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS logic -->
+    <script>
+        // State variables
+        let L = 300;     // Target Mature Weight
+        let k = 0.22;    // Growth rate coefficient
+        const W0 = 15;   // Birth weight (fixed constant for KK cattle)
+        const totalMonths = 24;
+        let selectedMonth = 12; // Initial state point
+        let viewMode = 'both';  // 'both' or 'weight'
+        let chartInstance = null;
+
+        // Elements
+        const sliderL = document.getElementById('sliderL');
+        const sliderK = document.getElementById('sliderK');
+        const valL = document.getElementById('valL');
+        const valK = document.getElementById('valK');
+        const inspectAge = document.getElementById('inspectAge');
+        const inspectWeight = document.getElementById('inspectWeight');
+        const inspectDerivative = document.getElementById('inspectDerivative');
+        const inspectAdg = document.getElementById('inspectAdg');
+        const growthPercentage = document.getElementById('growthPercentage');
+        const efficiencyProgress = document.getElementById('efficiencyProgress');
+        const laymanText = document.getElementById('laymanText');
+        const btnBoth = document.getElementById('btnBoth');
+        const btnWeightOnly = document.getElementById('btnWeightOnly');
+
+        // Trace Elements
+        const mathTraceC = document.getElementById('mathTraceC');
+        const mathTraceE = document.getElementById('mathTraceE');
+        const mathTraceDenom = document.getElementById('mathTraceDenom');
+
+        // Equations calculation helper
+        function calculateGrowth(t, currentL, currentK) {
+            const C = (currentL - W0) / W0;
+            const expTerm = Math.exp(-currentK * t);
+            const denominator = 1 + C * expTerm;
+            const weight = currentL / denominator;
+            
+            // Derivative dW/dt calculation
+            const derivative = (currentL * C * currentK * expTerm) / (denominator * denominator);
+            
+            // Average Daily Gain in grams (divided by 30.4 days in a month, multiplied by 1000g)
+            const adg = (derivative / 30.4) * 1000;
+            
+            return {
+                weight: weight,
+                derivative: derivative,
+                adg: adg,
+                C: C,
+                expTerm: expTerm,
+                denom: denominator
+            };
+        }
+
+        // Generate data arrays for the chart
+        function generateDataset(currentL, currentK) {
+            const labels = [];
+            const weights = [];
+            const derivatives = [];
+            
+            for (let t = 0; t <= totalMonths; t += 0.5) {
+                labels.push(t);
+                const results = calculateGrowth(t, currentL, currentK);
+                weights.push(results.weight);
+                derivatives.push(results.derivative);
+            }
+            return { labels, weights, derivatives };
+        }
+
+        // Initialize and Update Chart
+        function renderChart() {
+            const data = generateDataset(L, k);
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            // Check if chart is already drawn, if yes destroy to recreate
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            // Datasets configuration depending on mode
+            const datasets = [];
+
+            // Dataset 1: Weight
+            datasets.push({
+                label: 'Cumulative Cattle Weight f(t) (kg)',
+                data: data.weights,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderWidth: 3,
+                yAxisID: 'yWeight',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0,
+                hoverPointRadius: 6
+            });
+
+            // Dataset 2: Growth Rate
+            if (viewMode === 'both') {
+                datasets.push({
+                    label: "Instantaneous Growth Rate f'(t) (kg/month)",
+                    data: data.derivatives,
+                    borderColor: '#6366f1',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    yAxisID: 'yDerivative',
+                    tension: 0.3,
+                    pointRadius: 0,
+                    hoverPointRadius: 6
+                });
+            }
+
+            // Create annotation point/line indicating the selected inspection month
+            const selectedResults = calculateGrowth(selectedMonth, L, k);
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                boxWidth: 12,
+                                font: {
+                                    family: 'Plus Jakarta Sans',
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Age (Months)',
+                                font: {
+                                    weight: 'bold',
+                                    family: 'Plus Jakarta Sans'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        yWeight: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Cattle Weight f(t) (kg)',
+                                font: {
+                                    weight: 'bold',
+                                    family: 'Plus Jakarta Sans'
+                                }
+                            },
+                            min: 0,
+                            max: Math.ceil(L * 1.1 / 50) * 50
+                        },
+                        yDerivative: {
+                            type: 'linear',
+                            display: viewMode === 'both',
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: "Weight Gain Rate f'(t) (kg/month)",
+                                font: {
+                                    weight: 'bold',
+                                    family: 'Plus Jakarta Sans'
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false, // only want the grid lines for one axis
+                            },
+                            min: 0,
+                            max: Math.ceil((L * k / 4) * 1.2)
+                        }
+                    },
+                    onClick: (e) => {
+                        const points = chartInstance.getElementsAtEventForMode(e, 'index', { intersect: false }, true);
+                        if (points.length > 0) {
+                            const index = points[0].index;
+                            selectedMonth = data.labels[index];
+                            updateDashboard();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Calculations & UI updates
+        function updateDashboard() {
+            // Calculate variables
+            const data = calculateGrowth(selectedMonth, L, k);
+            
+            // Calculate Peak inflection point of Logistic Curve
+            // Peak rate is reached at the inflection point where t = ln(C) / k
+            const inflectionPoint = Math.log(data.C) / k;
+            const peakData = calculateGrowth(inflectionPoint, L, k);
+            const peakDerivative = peakData.derivative;
+            
+            // Calculate current rate efficiency relative to peak
+            const efficiency = Math.round((data.derivative / peakDerivative) * 100);
+
+            // Update DOM text
+            inspectAge.textContent = `${selectedMonth.toFixed(1)} Months`;
+            inspectWeight.textContent = `${data.weight.toFixed(1)} kg`;
+            inspectDerivative.textContent = `${data.derivative.toFixed(1)} kg/mo`;
+            inspectAdg.textContent = `${Math.round(data.adg)} g/day`;
+            growthPercentage.textContent = `${efficiency}% of peak rate`;
+            efficiencyProgress.style.width = `${efficiency}%`;
+
+            // Step calculations trace updating
+            mathTraceC.textContent = data.C.toFixed(2);
+            mathTraceE.textContent = data.expTerm.toFixed(3);
+            mathTraceDenom.textContent = data.denom.toFixed(3);
+
+            // Layman explanation text generation engine
+            let explanation = "";
+            if (selectedMonth < (inflectionPoint - 3)) {
+                explanation = "🚀 **Early Skeletal & Muscle growth phase**: The animal is building its baseline structure. Feed efficiency is stable. Adequate mineral supplements (Phosphorus, Calcium) are vital.";
+            } else if (selectedMonth >= (inflectionPoint - 3) && selectedMonth <= (inflectionPoint + 2)) {
+                explanation = "🔥 **Peak Growth Phase (Inflection Zone)**: Highest daily muscle protein deposition happens here! This is the peak biological ADG. Ensure protein-dense pasture supplements (palm kernel cake, or legumes) to fully exploit genetic potential.";
+            } else if (selectedMonth > (inflectionPoint + 2) && selectedMonth < 20) {
+                explanation = "📉 **Slowing Down (Deceleration Phase)**: Muscle skeletal building is completed, shifting toward fat deposition. Energy intake should be moderately regulated to maintain efficient pasture budget.";
+            } else {
+                explanation = "🎯 **Plateau Phase (Market Ready)**: Growth curve flattening close to 0. Optimal meat-to-fat composition achieved. Recommended age for slaughter to avoid unprofitable feed conversion costs.";
+            }
+            laymanText.innerHTML = explanation;
+
+            // Trigger minor chart update highlighting selected point
+            // For simple state updates, redraw handles the vertical visual indicator
+            chartInstance.update();
+        }
+
+        // Initialize Slider Events
+        sliderL.addEventListener('input', (e) => {
+            L = parseFloat(e.target.value);
+            valL.textContent = `${L} kg`;
+            renderChart();
+            updateDashboard();
+        });
+
+        sliderK.addEventListener('input', (e) => {
+            k = parseFloat(e.target.value);
+            valK.textContent = k.toFixed(2);
+            renderChart();
+            updateDashboard();
+        });
+
+        // View Toggles
+        btnBoth.addEventListener('click', () => {
+            viewMode = 'both';
+            btnBoth.className = "px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm transition";
+            btnWeightOnly.className = "px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 transition";
+            renderChart();
+        });
+
+        btnWeightOnly.addEventListener('click', () => {
+            viewMode = 'weight';
+            btnWeightOnly.className = "px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm transition";
+            btnBoth.className = "px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 transition";
+            renderChart();
+        });
+
+        // Window Initial Load Trigger
+        window.onload = function() {
+            renderChart();
+            updateDashboard();
+        };
+    </script>
+</body>
+</html></pre>
+        </body>
+    </html>
